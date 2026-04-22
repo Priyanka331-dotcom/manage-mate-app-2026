@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8EDEB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Greeting -->
+        <TextView
+            android:id="@+id/txtHello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello User 👋"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Self Attendance -->
+        <Button
+            android:id="@+id/btnAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Self Attendance"
+            android:backgroundTint="#D8E2DC"
+            android:textColor="#000000"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Calendar -->
+        <Button
+            android:id="@+id/btnCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Calendar"
+            android:backgroundTint="#E8E8F8"
+            android:textColor="#000000"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- To-Do List -->
+        <Button
+            android:id="@+id/btnTodo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="To-Do List"
+            android:backgroundTint="#ECE4DB"
+            android:textColor="#000000"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Reminders -->
+        <Button
+            android:id="@+id/btnReminder"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Reminders"
+            android:backgroundTint="#FFDDE1"
+            android:textColor="#000000"
+            android:layout_marginBottom="12dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
