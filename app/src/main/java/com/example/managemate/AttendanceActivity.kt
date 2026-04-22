@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-// Data class
 data class Attendance(
     var present: Int = 0,
     var absent: Int = 0,
@@ -27,29 +26,22 @@ class AttendanceActivity : AppCompatActivity() {
         val btnAddSubject = findViewById<Button>(R.id.btnAddSubject)
         val container = findViewById<LinearLayout>(R.id.subjectContainer)
 
-        // LOAD DATA
         attendanceMap = loadData()
 
-        // REBUILD UI from saved data
+        // Rebuild UI
         for (subject in attendanceMap.keys) {
-            val subjectView = createSubjectView(subject)
-            container.addView(subjectView)
+            container.addView(createSubjectView(subject))
         }
 
-        // Add subject
         btnAddSubject.setOnClickListener {
             val subject = edtSubject.text.toString().trim()
 
             if (subject.isNotEmpty()) {
-
                 if (!attendanceMap.containsKey(subject)) {
                     attendanceMap[subject] = Attendance()
                     saveData()
-
-                    val subjectView = createSubjectView(subject)
-                    container.addView(subjectView)
+                    container.addView(createSubjectView(subject))
                 }
-
                 edtSubject.text.clear()
             } else {
                 Toast.makeText(this, "Enter subject", Toast.LENGTH_SHORT).show()
@@ -82,10 +74,9 @@ class AttendanceActivity : AppCompatActivity() {
 
         val txtResult = TextView(this)
 
-        // Show correct data initially
         updateUI(txtResult, subject)
 
-        // Present
+        // Add attendance
         btnPresent.setOnClickListener {
             val data = attendanceMap[subject]!!
             data.present++
@@ -93,7 +84,6 @@ class AttendanceActivity : AppCompatActivity() {
             updateUI(txtResult, subject)
         }
 
-        // Absent
         btnAbsent.setOnClickListener {
             val data = attendanceMap[subject]!!
             data.absent++
@@ -101,7 +91,6 @@ class AttendanceActivity : AppCompatActivity() {
             updateUI(txtResult, subject)
         }
 
-        // Holiday
         btnHoliday.setOnClickListener {
             val data = attendanceMap[subject]!!
             data.holiday++
@@ -113,6 +102,99 @@ class AttendanceActivity : AppCompatActivity() {
         title.setOnClickListener {
             innerLayout.visibility =
                 if (innerLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+        }
+
+        // LONG PRESS MENU
+        title.setOnLongClickListener {
+
+            val options = arrayOf(
+                "Edit Subject",
+                "Delete Subject",
+                "Reset Attendance",
+                "Undo Last Change"
+            )
+
+            android.app.AlertDialog.Builder(this)
+                .setTitle(subject)
+                .setItems(options) { _, which ->
+
+                    when (which) {
+
+                        // ✏️ EDIT
+                        0 -> {
+                            val input = EditText(this)
+                            input.setText(subject)
+
+                            android.app.AlertDialog.Builder(this)
+                                .setTitle("Edit Subject")
+                                .setView(input)
+                                .setPositiveButton("Save") { _, _ ->
+
+                                    val newName = input.text.toString().trim()
+
+                                    if (newName.isNotEmpty() && !attendanceMap.containsKey(newName)) {
+                                        val data = attendanceMap[subject]!!
+                                        attendanceMap.remove(subject)
+                                        attendanceMap[newName] = data
+                                        saveData()
+                                        recreate()
+                                    }
+                                }
+                                .setNegativeButton("Cancel", null)
+                                .show()
+                        }
+
+                        // 🗑 DELETE (Direct options, no extra title)
+                        1 -> {
+                            val deleteOptions = arrayOf(
+                                "Delete Only Attendance",
+                                "Delete Entire Subject"
+                            )
+
+                            android.app.AlertDialog.Builder(this)
+                                .setItems(deleteOptions) { _, choice ->
+
+                                    when (choice) {
+
+                                        0 -> {
+                                            attendanceMap[subject] = Attendance()
+                                            saveData()
+                                            updateUI(txtResult, subject)
+                                        }
+
+                                        1 -> {
+                                            attendanceMap.remove(subject)
+                                            saveData()
+                                            recreate()
+                                        }
+                                    }
+                                }
+                                .setNegativeButton("Cancel", null)
+                                .show()
+                        }
+
+                        // 🔄 RESET
+                        2 -> {
+                            attendanceMap[subject] = Attendance()
+                            saveData()
+                            updateUI(txtResult, subject)
+                        }
+
+                        // ↩️ UNDO
+                        3 -> {
+                            val data = attendanceMap[subject]!!
+                            if (data.present > 0) data.present--
+                            else if (data.absent > 0) data.absent--
+                            else if (data.holiday > 0) data.holiday--
+
+                            saveData()
+                            updateUI(txtResult, subject)
+                        }
+                    }
+                }
+                .show()
+
+            true
         }
 
         innerLayout.addView(btnPresent)
@@ -132,40 +214,28 @@ class AttendanceActivity : AppCompatActivity() {
         val totalClasses = data.present + data.absent
         val percentage = if (totalClasses > 0) {
             (data.present * 100) / totalClasses
-        } else {
-            0
-        }
+        } else 0
 
         txtResult.text =
             "Present: ${data.present} | Absent: ${data.absent} | Holiday: ${data.holiday}\n" +
                     "Total Classes: $totalClasses | Attendance: $percentage%"
     }
 
-    // SAVE DATA
     private fun saveData() {
         val prefs = getSharedPreferences("attendance_prefs", MODE_PRIVATE)
         val editor = prefs.edit()
 
-        val gson = Gson()
-        val json = gson.toJson(attendanceMap)
-
+        val json = Gson().toJson(attendanceMap)
         editor.putString("attendance_data", json)
         editor.apply()
     }
 
-    // LOAD DATA
     private fun loadData(): HashMap<String, Attendance> {
         val prefs = getSharedPreferences("attendance_prefs", MODE_PRIVATE)
-        val gson = Gson()
-
         val json = prefs.getString("attendance_data", null)
 
         val type = object : TypeToken<HashMap<String, Attendance>>() {}.type
 
-        return if (json != null) {
-            gson.fromJson(json, type)
-        } else {
-            HashMap()
-        }
+        return if (json != null) Gson().fromJson(json, type) else HashMap()
     }
 }
