@@ -8,25 +8,28 @@ import androidx.core.app.NotificationCompat
 
 object NotificationHelper {
 
+    private const val CHANNEL_ID = "reminder_channel"
+
     fun sendNotification(context: Context) {
 
-        val channelId = "reminder_channel"
+        val manager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
+        // Channel for Android 8+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                channelId,
-                "Reminders",
+                CHANNEL_ID,
+                "Reminder Channel",
                 NotificationManager.IMPORTANCE_HIGH
             )
             manager.createNotificationChannel(channel)
         }
 
-        val notification = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("Manage Mate Reminder")
-            .setContentText("You have pending tasks!")
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setContentTitle("Reminder 🔔")
+            .setContentText("Time to complete your task!")
             .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
 
         manager.notify(1, notification)
