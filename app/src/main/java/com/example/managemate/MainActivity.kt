@@ -2,7 +2,7 @@ package com.example.managemate
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val btnAttendance = findViewById<Button>(R.id.btnAttendance)
-        val btnCalendar = findViewById<Button>(R.id.btnCalendar)
-        val btnTodo = findViewById<Button>(R.id.btnTodo)
-        val btnReminder = findViewById<Button>(R.id.btnReminder)
+        val btnAttendance = findViewById<LinearLayout>(R.id.btnAttendance)
+        val btnCalendar = findViewById<LinearLayout>(R.id.btnCalendar)
+        val btnTodo = findViewById<LinearLayout>(R.id.btnTodo)
+        val btnReminder = findViewById<LinearLayout>(R.id.btnReminder)
 
         btnAttendance.setOnClickListener {
             startActivity(Intent(this, AttendanceActivity::class.java))

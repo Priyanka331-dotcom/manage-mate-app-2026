@@ -13,7 +13,8 @@
         android:text="To-Do List"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="40dp"/>
 
     <!-- Add Task Input Row -->
     <LinearLayout
