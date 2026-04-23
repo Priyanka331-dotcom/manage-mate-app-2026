@@ -8,58 +8,116 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="16dp">
 
-        <!-- Greeting -->
+        <!-- Header -->
         <TextView
-            android:id="@+id/txtHello"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello User 👋"
+            android:text="👋 Hello User"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#333333"
-            android:layout_marginBottom="20dp"/>
-
-        <!-- Self Attendance -->
-        <Button
-            android:id="@+id/btnAttendance"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Self Attendance"
-            android:backgroundTint="#D8E2DC"
             android:textColor="#000000"
-            android:layout_marginBottom="12dp"/>
+            android:paddingBottom="20dp"/>
 
-        <!-- Calendar -->
-        <Button
-            android:id="@+id/btnCalendar"
+        <!-- GRID MENU -->
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Calendar"
-            android:backgroundTint="#E8E8F8"
-            android:textColor="#000000"
-            android:layout_marginBottom="12dp"/>
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:alignmentMode="alignMargins"
+            android:useDefaultMargins="true">
 
-        <!-- To-Do List -->
-        <Button
-            android:id="@+id/btnTodo"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="To-Do List"
-            android:backgroundTint="#ECE4DB"
-            android:textColor="#000000"
-            android:layout_marginBottom="12dp"/>
+            <!-- Attendance -->
+            <LinearLayout
+                android:id="@+id/btnAttendance"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/rounded_card"
+                android:backgroundTint="#D8E2DC"
+                android:padding="10dp"
+                android:elevation="6dp">
 
-        <!-- Reminders -->
-        <Button
-            android:id="@+id/btnReminder"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Reminders"
-            android:backgroundTint="#FFDDE1"
-            android:textColor="#000000"
-            android:layout_marginBottom="12dp"/>
+                <TextView
+                    android:text="📊 Attendance"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!-- To Do -->
+            <LinearLayout
+                android:id="@+id/btnTodo"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/rounded_card"
+                android:backgroundTint="#FFE5D9"
+                android:padding="10dp"
+                android:elevation="6dp">
+
+                <TextView
+                    android:text="📝 To-Do"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!-- Calendar -->
+            <LinearLayout
+                android:id="@+id/btnCalendar"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/rounded_card"
+                android:backgroundTint="#FFF1E6"
+                android:padding="10dp"
+                android:elevation="6dp">
+
+                <TextView
+                    android:text="📅 Calendar"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!-- Reminder -->
+            <LinearLayout
+                android:id="@+id/btnReminder"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/rounded_card"
+                android:backgroundTint="#E2ECE9"
+                android:padding="10dp"
+                android:elevation="6dp">
+
+                <TextView
+                    android:text="⏰ Reminder"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </GridLayout>
 
     </LinearLayout>
 
