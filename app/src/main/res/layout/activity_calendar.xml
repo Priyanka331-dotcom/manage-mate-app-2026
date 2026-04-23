@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8EDEB">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,35 +10,53 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/eventName"
-            android:hint="Enter event"
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
 
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Calendar"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"/>
 
-        <TimePicker
-            android:id="@+id/timePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnAddEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:backgroundTint="#D8E2DC"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/setReminderBtn"
-            android:text="Set Reminder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <!-- Calendar -->
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"/>
 
+        <!-- Events title -->
         <TextView
-            android:id="@+id/resultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No events yet"
+            android:text="Events"
             android:textSize="18sp"
-            android:paddingTop="16dp"/>
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Vertical event list -->
+        <LinearLayout
+            android:id="@+id/eventContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
     </LinearLayout>
 
 </ScrollView>
