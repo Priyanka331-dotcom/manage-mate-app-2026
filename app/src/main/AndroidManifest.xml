@@ -21,6 +21,9 @@
         <activity android:name=".CalendarActivity" />
         <activity android:name=".TodoActivity" />
         <activity android:name=".AttendanceActivity" />
+
+        <receiver android:name=".ReminderReceiver" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

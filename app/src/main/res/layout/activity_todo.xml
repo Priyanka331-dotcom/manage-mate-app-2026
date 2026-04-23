@@ -1,71 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8EDEB">
 
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To-Do List"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Add Task Input Row -->
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="20dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To-Do List"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Task -->
         <EditText
             android:id="@+id/edtTask"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="Enter Task"/>
 
-        <!-- Deadline -->
-        <EditText
-            android:id="@+id/edtDeadline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Deadline"
-            android:layout_marginTop="10dp"/>
-
-        <!-- Priority -->
-        <Spinner
-            android:id="@+id/spinnerPriority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
-
-        <!-- Subtask input -->
-        <EditText
-            android:id="@+id/edtSubtask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add Subtask"
-            android:layout_marginTop="10dp"/>
-
-        <!-- Add subtask button -->
         <Button
-            android:id="@+id/btnAddSubtask"
-            android:layout_width="match_parent"
+            android:id="@+id/btnAddTask"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Subtask"
-            android:backgroundTint="#D8E2DC"
-            android:layout_marginTop="10dp"/>
-
-        <!-- Subtask list -->
-        <TextView
-            android:id="@+id/txtSubtasks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Subtasks will appear here"
-            android:layout_marginTop="10dp"/>
-
+            android:text="+"
+            android:backgroundTint="#D8E2DC"/>
     </LinearLayout>
 
-</ScrollView>
+    <!-- Task List -->
+    <ListView
+        android:id="@+id/listTasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"/>
+</LinearLayout>
